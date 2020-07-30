@@ -1,0 +1,22 @@
+version: "2"
+services: 
+    ui:
+        build: ./ui
+        ports:
+            - "3000:3000"
+        depends_on: 
+            - api
+    api: 
+        build: ./api
+        ports: 
+            - "8080:8080"
+        depends_on: 
+            - db
+    db:
+        image: mongo
+        volumes:
+            - mongo_data:/var/lib/mongo/data/
+        ports:
+            - "27017:27017"
+volumes: 
+    mongo_data:
